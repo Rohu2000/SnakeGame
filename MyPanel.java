@@ -22,17 +22,17 @@ public class MyPanel extends JPanel implements KeyListener, ActionListener {
     boolean isRight=true;
     boolean isLeft=false;
 
-    //position of the food in random positions and the pixel size of food is 25px
+    //positions of the food in random positions and the pixel size of food is 25px
     int[] xpos={25,50,75,100,125,150,175,200,225,250,275,300,325,350,375,400,425,450,475,500,525,550,575,600,625,650,675,700,725,750,775,800,825,850};
     int[] ypos={75,100,125,150,175,200,225,250,275,300,325,350,375,400,425,450,475,500,525,550,575,600,625};
 
     Random random = new Random();//get random values
 
-    int foodx=150;//initial position of food
+    int foodx=150;//initial position of the food
     int foody=150;
     int[] snakeX=new int[750];
     int[] snakeY=new int[750];
-    int move=0;//initial move ,that is the starting game
+    int move=0;//initial move ,that is the game beginning from here
     int lengthOfSnake=3;//initially the size of the snake is 3
 
     Timer time;
@@ -41,7 +41,7 @@ public class MyPanel extends JPanel implements KeyListener, ActionListener {
 
     int score=0;
 
-    //for making actions jst like movement of snake create keylisteners
+    //for making actions or movements , create keylisteners
     MyPanel(){
         addKeyListener(this);
         setFocusable(true);
@@ -62,7 +62,7 @@ public class MyPanel extends JPanel implements KeyListener, ActionListener {
 
         if(move==0)
         {
-            //the snakeimage is size of 25 pixel . for that we take 25 pixel difference
+            //the snakeimage is size of 25 pixel and for that we take 25 pixel difference
             snakeX[0]=100;//position of the head
             snakeX[1]=75;//
             snakeX[2]=50;
@@ -119,7 +119,7 @@ public class MyPanel extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        //if we press space key then restart the game again
+        //if we press space key then restarts the game 
         if(e.getKeyCode()==KeyEvent.VK_SPACE && GameOvervar)
         {
             restart();
@@ -134,7 +134,7 @@ public class MyPanel extends JPanel implements KeyListener, ActionListener {
           isDown=false;
           isRight=true;
 
-          move++;//movement is incremented on left arrow key
+          move++;//movement is incremented when pressing right arrow key
 
       }
       if(e.getKeyCode()==KeyEvent.VK_LEFT)
@@ -167,7 +167,7 @@ public class MyPanel extends JPanel implements KeyListener, ActionListener {
     }
 
     private void restart() {
-        //we need to restart the game and GameOvervar should be false
+        //we need to restart the game and  put GameOvervar value as false
         GameOvervar=false;
         move=0;
         score=0;
@@ -193,7 +193,7 @@ public class MyPanel extends JPanel implements KeyListener, ActionListener {
             snakeX[i]=snakeX[i-1];//moving forward means increment the snakex and snakey index
             snakeY[i]=snakeY[i-1];
         }
-        if(isLeft) {//reduce the length when the snake move left
+        if(isLeft) {// when the snake move left means decreasing pxl values
             snakeX[0] = snakeX[0] - 25;
         }
         if(isRight) {
@@ -206,9 +206,8 @@ public class MyPanel extends JPanel implements KeyListener, ActionListener {
             snakeY[0] = snakeY[0] + 25;
         }
 
-        if(snakeX[0]>850) snakeX[0]=25;//if the snake move outside the
-        // boundary then snake
-        //should come next direction.
+        if(snakeX[0]>850) snakeX[0]=25;//if the snake move outside the boundary then snake
+        //should come to the next direction.
         if(snakeX[0]<25) snakeX[0]=850;
         if(snakeY[0]>625) snakeY[0]=75;
         if(snakeY[0]<75) snakeY[0]=625;
@@ -238,8 +237,7 @@ public class MyPanel extends JPanel implements KeyListener, ActionListener {
         if(snakeX[0]==foodx && snakeY[0]==foody)
         {
             newfood();
-            //length of snake incremented by one when
-            // colliding with food
+            //length of snake incremented by one when colliding with food
             lengthOfSnake++;
             //when hit the food, then increment the score by one.
             score++;
